@@ -1,230 +1,300 @@
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb+srv://haideramoazzam:k2UNQCuAX7heCh@travel-planner.le3q2ar.mongodb.net/?retryWrites=true&w=majority&appName=travel-planner'; // Replace with your MongoDB connection string
-const dbName = 'travel-planner-flights'; // Replace with your database name
-const collectionName = 'airline_routes'; // Replace with your collection name
+const url = 'mongodb+srv://haideramoazzam:k2UNQCuAX7heCh@travel-planner.le3q2ar.mongodb.net/?retryWrites=true&w=majority&appName=travel-planner';
+const dbName = 'travel-planner-flights';
+const collectionName = 'flight_info';
 
 
 const data = [
   {
-    "departure_city": "Miami",
-    "departure_code": "MIA",
-    "arrival_city": "New York",
-    "arrival_code": "JFK",
+    "departure_city": "Frankfurt",
+    "departure_code": "FRA",
+    "arrival_city": "Philadelphia",
+    "arrival_code": "PHL",
     "airline": {
-      "id": "a1b4e",
-      "name": "Alaska Airlines"
-    }
+      "id": "d1c8f",
+      "name": "Lufthansa"
+    },
+    "flight_id": "LH402",
+    "departure_date": "2024-08-15T18:00:00.000+00:00"
   },
   {
-    "departure_city": "Miami",
-    "departure_code": "MIA",
+    "departure_city": "Sydney",
+    "departure_code": "SYD",
+    "arrival_city": "Austin",
+    "arrival_code": "AUS",
+    "airline": {
+      "id": "b9a8e",
+      "name": "Singapore Airlines"
+    },
+    "flight_id": "SQ303",
+    "departure_date": "2024-08-16T20:30:00.000+00:00"
+  },
+  {
+    "departure_city": "Amsterdam",
+    "departure_code": "AMS",
+    "arrival_city": "Tokyo",
+    "arrival_code": "HND",
+    "airline": {
+      "id": "9e5d6",
+      "name": "KLM Royal Dutch Airlines"
+    },
+    "flight_id": "KL864",
+    "departure_date": "2024-08-17T22:45:00.000+00:00"
+  },
+  {
+    "departure_city": "Rome",
+    "departure_code": "FCO",
+    "arrival_city": "London",
+    "arrival_code": "LHR",
+    "airline": {
+      "id": "3f7a2",
+      "name": "Air France"
+    },
+    "flight_id": "AF231",
+    "departure_date": "2024-08-18T10:00:00.000+00:00"
+  },
+  {
+    "departure_city": "Madrid",
+    "departure_code": "MAD",
+    "arrival_city": "Paris",
+    "arrival_code": "CDG",
+    "airline": {
+      "id": "3f7a2",
+      "name": "Air France"
+    },
+    "flight_id": "AF101",
+    "departure_date": "2024-08-19T12:30:00.000+00:00"
+  },
+  {
+    "departure_city": "Beijing",
+    "departure_code": "PEK",
+    "arrival_city": "Dubai",
+    "arrival_code": "DXB",
+    "airline": {
+      "id": "5e1c9",
+      "name": "Turkish Airlines"
+    },
+    "flight_id": "TK204",
+    "departure_date": "2024-08-20T14:45:00.000+00:00"
+  },
+  {
+    "departure_city": "Istanbul",
+    "departure_code": "IST",
+    "arrival_city": "Toronto",
+    "arrival_code": "YYZ",
+    "airline": {
+      "id": "5e1c9",
+      "name": "Turkish Airlines"
+    },
+    "flight_id": "TK205",
+    "departure_date": "2024-08-21T16:00:00.000+00:00"
+  },
+  {
+    "departure_city": "Tokyo",
+    "departure_code": "HND",
+    "arrival_city": "Vancouver",
+    "arrival_code": "YVR",
+    "airline": {
+      "id": "6b9ad",
+      "name": "ANA (All Nippon Airways)"
+    },
+    "flight_id": "NH206",
+    "departure_date": "2024-08-22T18:15:00.000+00:00"
+  },
+  {
+    "departure_city": "Frankfurt",
+    "departure_code": "FRA",
+    "arrival_city": "Sydney",
+    "arrival_code": "SYD",
+    "airline": {
+      "id": "d1c8f",
+      "name": "Lufthansa"
+    },
+    "flight_id": "LH407",
+    "departure_date": "2024-08-23T20:30:00.000+00:00"
+  },
+  {
+    "departure_city": "Madrid",
+    "departure_code": "MAD",
+    "arrival_city": "Amsterdam",
+    "arrival_code": "AMS",
+    "airline": {
+      "id": "3f7a2",
+      "name": "Air France"
+    },
+    "flight_id": "AF208",
+    "departure_date": "2024-08-24T22:45:00.000+00:00"
+  },
+  {
+    "departure_city": "Beijing",
+    "departure_code": "PEK",
+    "arrival_city": "Frankfurt",
+    "arrival_code": "FRA",
+    "airline": {
+      "id": "5e1c9",
+      "name": "Turkish Airlines"
+    },
+    "flight_id": "TK209",
+    "departure_date": "2024-08-25T10:00:00.000+00:00"
+  },
+  {
+    "departure_city": "Istanbul",
+    "departure_code": "IST",
+    "arrival_city": "Madrid",
+    "arrival_code": "MAD",
+    "airline": {
+      "id": "5e1c9",
+      "name": "Turkish Airlines"
+    },
+    "flight_id": "TK210",
+    "departure_date": "2024-08-26T12:30:00.000+00:00"
+  },
+  {
+    "departure_city": "Tokyo",
+    "departure_code": "HND",
+    "arrival_city": "Beijing",
+    "arrival_code": "PEK",
+    "airline": {
+      "id": "6b9ad",
+      "name": "ANA (All Nippon Airways)"
+    },
+    "flight_id": "NH211",
+    "departure_date": "2024-08-27T14:45:00.000+00:00"
+  },
+  {
+    "departure_city": "Dubai",
+    "departure_code": "DXB",
+    "arrival_city": "Istanbul",
+    "arrival_code": "IST",
+    "airline": {
+      "id": "5e1c9",
+      "name": "Turkish Airlines"
+    },
+    "flight_id": "TK212",
+    "departure_date": "2024-08-28T16:00:00.000+00:00"
+  },
+  {
+    "departure_city": "London",
+    "departure_code": "LHR",
     "arrival_city": "Los Angeles",
     "arrival_code": "LAX",
     "airline": {
-      "id": "1d6b2",
-      "name": "JetBlue Airways"
-    }
+      "id": "6b3ea",
+      "name": "British Airways"
+    },
+    "flight_id": "BA213",
+    "departure_date": "2024-08-29T18:15:00.000+00:00"
   },
   {
-    "departure_city": "Miami",
-    "departure_code": "MIA",
+    "departure_city": "Tokyo",
+    "departure_code": "HND",
     "arrival_city": "Chicago",
     "arrival_code": "ORD",
     "airline": {
-      "id": "e8f5d",
-      "name": "Spirit Airlines"
-    }
+      "id": "6b9ad",
+      "name": "ANA (All Nippon Airways)"
+    },
+    "flight_id": "NH214",
+    "departure_date": "2024-08-30T20:30:00.000+00:00"
   },
   {
-    "departure_city": "Miami",
-    "departure_code": "MIA",
-    "arrival_city": "Dallas",
-    "arrival_code": "DFW",
+    "departure_city": "Paris",
+    "departure_code": "CDG",
+    "arrival_city": "Miami",
+    "arrival_code": "MIA",
     "airline": {
-      "id": "4c7ea",
-      "name": "Frontier Airlines"
-    }
+      "id": "5c8f3",
+      "name": "Qatar Airways"
+    },
+    "flight_id": "QR215",
+    "departure_date": "2024-09-01T10:00:00.000+00:00"
   },
   {
-    "departure_city": "Miami",
-    "departure_code": "MIA",
+    "departure_city": "Frankfurt",
+    "departure_code": "FRA",
     "arrival_city": "Atlanta",
     "arrival_code": "ATL",
     "airline": {
-      "id": "b9d8f",
-      "name": "Hawaiian Airlines"
-    }
+      "id": "d1c8f",
+      "name": "Lufthansa"
+    },
+    "flight_id": "LH216",
+    "departure_date": "2024-09-02T12:30:00.000+00:00"
   },
   {
-    "departure_city": "Miami",
-    "departure_code": "MIA",
+    "departure_city": "Sydney",
+    "departure_code": "SYD",
     "arrival_city": "San Francisco",
     "arrival_code": "SFO",
     "airline": {
-      "id": "f3a2c",
-      "name": "Allegiant Air"
-    }
+      "id": "b9a8e",
+      "name": "Singapore Airlines"
+    },
+    "flight_id": "SQ217",
+    "departure_date": "2024-09-03T14:45:00.000+00:00"
   },
   {
-    "departure_city": "Miami",
-    "departure_code": "MIA",
+    "departure_city": "Tokyo",
+    "departure_code": "HND",
     "arrival_city": "Denver",
     "arrival_code": "DEN",
     "airline": {
-      "id": "5e9a7",
-      "name": "Southwest Airlines"
-    }
+      "id": "6b9ad",
+      "name": "ANA (All Nippon Airways)"
+    },
+    "flight_id": "NH218",
+    "departure_date": "2024-09-04T16:00:00.000+00:00"
   },
   {
-    "departure_city": "Miami",
-    "departure_code": "MIA",
+    "departure_city": "London",
+    "departure_code": "LHR",
+    "arrival_city": "Seattle",
+    "arrival_code": "SEA",
+    "airline": {
+      "id": "6b3ea",
+      "name": "British Airways"
+    },
+    "flight_id": "BA219",
+    "departure_date": "2024-09-05T18:15:00.000+00:00"
+  },
+  {
+    "departure_city": "Dubai",
+    "departure_code": "DXB",
     "arrival_city": "Phoenix",
     "arrival_code": "PHX",
     "airline": {
       "id": "a7b1e",
       "name": "Emirates"
-    }
+    },
+    "flight_id": "EK220",
+    "departure_date": "2024-09-06T20:30:00.000+00:00"
   },
   {
-    "departure_city": "Miami",
-    "departure_code": "MIA",
+    "departure_city": "Paris",
+    "departure_code": "CDG",
     "arrival_city": "Honolulu",
     "arrival_code": "HNL",
     "airline": {
-      "id": "6b3ea",
-      "name": "British Airways"
-    }
+      "id": "5c8f3",
+      "name": "Qatar Airways"
+    },
+    "flight_id": "QR221",
+    "departure_date": "2024-09-07T22:45:00.000+00:00"
   },
   {
-    "departure_city": "Los Angeles",
-    "departure_code": "LAX",
-    "arrival_city": "San Francisco",
-    "arrival_code": "SFO",
+    "departure_city": "Frankfurt",
+    "departure_code": "FRA",
+    "arrival_city": "Boston",
+    "arrival_code": "BOS",
     "airline": {
       "id": "d1c8f",
       "name": "Lufthansa"
-    }
-  },
-  {
-    "departure_city": "Los Angeles",
-    "departure_code": "LAX",
-    "arrival_city": "Las Vegas",
-    "arrival_code": "LAS",
-    "airline": {
-      "id": "3f7a2",
-      "name": "Air France"
-    }
-  },
-  {
-    "departure_city": "Los Angeles",
-    "departure_code": "LAX",
-    "arrival_city": "New York",
-    "arrival_code": "JFK",
-    "airline": {
-      "id": "9e5d6",
-      "name": "KLM Royal Dutch Airlines"
-    }
-  },
-  {
-    "departure_city": "Los Angeles",
-    "departure_code": "LAX",
-    "arrival_city": "Chicago",
-    "arrival_code": "ORD",
-    "airline": {
-      "id": "8a4f7",
-      "name": "WestJet"
-    }
-  },
-  {
-    "departure_city": "Los Angeles",
-    "departure_code": "LAX",
-    "arrival_city": "Dallas",
-    "arrival_code": "DFW",
-    "airline": {
-      "id": "6b9ad",
-      "name": "ANA (All Nippon Airways)"
-    }
-  },
-  {
-    "departure_city": "Los Angeles",
-    "departure_code": "LAX",
-    "arrival_city": "Seattle",
-    "arrival_code": "SEA",
-    "airline": {
-      "id": "d8f5c",
-      "name": "Japan Airlines"
-    }
-  },
-  {
-    "departure_city": "Los Angeles",
-    "departure_code": "LAX",
-    "arrival_city": "Atlanta",
-    "arrival_code": "ATL",
-    "airline": {
-      "id": "3a6e9",
-      "name": "Korean Air"
-    }
-  },
-  {
-    "departure_city": "Los Angeles",
-    "departure_code": "LAX",
-    "arrival_city": "Denver",
-    "arrival_code": "DEN",
-    "airline": {
-      "id": "7b2f1",
-      "name": "Thai Airways"
-    }
-  },
-  {
-    "departure_city": "Los Angeles",
-    "departure_code": "LAX",
-    "arrival_city": "Phoenix",
-    "arrival_code": "PHX",
-    "airline": {
-      "id": "5e1c9",
-      "name": "Turkish Airlines"
-    }
-  },
-  {
-    "departure_city": "Los Angeles",
-    "departure_code": "LAX",
-    "arrival_city": "Honolulu",
-    "arrival_code": "HNL",
-    "airline": {
-      "id": "e6a3b",
-      "name": "Pakistan International Airlines (PIA)"
-    }
-  },
-  {
-    "departure_city": "San Francisco",
-    "departure_code": "SFO",
-    "arrival_city": "Seattle",
-    "arrival_code": "SEA",
-    "airline": {
-      "id": "f9c2e",
-      "name": "Wizz Air"
-    }
-  },
-  {
-    "departure_city": "San Francisco",
-    "departure_code": "SFO",
-    "arrival_city": "Denver",
-    "arrival_code": "DEN",
-    "airline": {
-      "id": "f9x12",
-      "name": "Serene Air"
-    }
-  },
-  {
-    "departure_city": "San Francisco",
-    "departure_code": "SFO",
-    "arrival_city": "Phoenix",
-    "arrival_code": "PHX",
-    "airline": {
-      "id": "ab1f2",
-      "name": "Air Blue"
-    }
-  }];
+    },
+    "flight_id": "LH222",
+    "departure_date": "2024-09-08T10:00:00.000+00:00"
+  }
+]
+  ;
 
 
 async function insertDocuments() {
