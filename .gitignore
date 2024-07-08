@@ -2,3 +2,4 @@
 test.js
 Src/query.js
 Src/Config/flight-infoDB.js
+Src/Config/FlightsDBconnection.js
