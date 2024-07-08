@@ -1,16 +1,29 @@
-const express = require('express');
+const mongoose = require('mongoose');
+const getFlights = require('../Model/DB/GetFlightsQuery');
 
-const ReqParam = {
+async function GetFlightsDB(params, res) {
+  // const QueryParams = {
+  //   DepCity: params.DepCity,
+  //   ArrivalCity: params.ArrivalCity,
+  //   DepDate: params.DepDate,
+  // }
 
-};
+  try {
+    await getFlights(params, res)
+  } catch (err) {
+    console.log(err)
+  }
+}
 
 async function GetFlightInfo(req, res) {
 
-  const { DepCity, ArrivalCity, DepDate, ArrivalDate, CabinClass } = req.query;
+  try {
 
-  res.json({ Departure_City: DepCity, Arrival_City: ArrivalCity, Departure_Date: DepDate, Arrival_Date: ArrivalDate, Cabin_Class: CabinClass });
+    await GetFlightsDB(req.query, res);
 
-
+  } catch (err) {
+    console.log(err)
+  }
 
 }
 

@@ -1,5 +1,4 @@
-import mongoose from 'mongoose';
-const { Schema } = mongoose;
+const mongoose = require('mongoose')
 
 const info_schema = {
   departure_city: String,
@@ -14,4 +13,6 @@ const info_schema = {
   departure_date: Date
 };
 
-const flight_info_schema = new Schema(info_schema)
+const flight_info_schema = new mongoose.Schema(info_schema)
+const Flight_Info = mongoose.model('flight_info', flight_info_schema);
+module.exports = Flight_Info;
