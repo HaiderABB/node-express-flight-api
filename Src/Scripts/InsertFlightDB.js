@@ -1,6 +1,6 @@
 
 const DBpass = require('../Config/DBpass');
-console.log(DBpass);
+// console.log(DBpass);
 
 const { MongoClient } = require('mongodb');
 const url = `mongodb+srv://haideramoazzam:${DBpass}@travel-planner.le3q2ar.mongodb.net/?retryWrites=true&w=majority&appName=travel-planner`
