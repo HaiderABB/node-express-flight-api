@@ -1,10 +1,18 @@
 const mongoose = require('mongoose');
-const getFlights = require('../Model/DB/GetFlightsQuery');
+const GetFlightsDB = require('../Model/DB/GetFlightsQuery');
 
 async function GetFlightInfo(req, res) {
   try {
 
-    await getFlights(req.query, res);
+    const ReqObj = {
+      DepCity: req.query.DepCity,
+      ArrivalCity: req.query.ArrivalCity,
+      DepDate: req.query.DepDate
+    }
+
+    console.log(ReqObj);
+
+    await GetFlightsDB(ReqObj, res);
 
   } catch (err) {
     console.log(err)

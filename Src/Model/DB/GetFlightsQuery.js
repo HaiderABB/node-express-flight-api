@@ -1,16 +1,16 @@
 const Flight_Info = require('../Schemas/flight_info')
 
-async function getFlights(query, res) {
+async function GetFlightsDB(ReqObj, res) {
 
-  const DepartureDate = new Date(query.DepDate);
+  const DepartureDate = new Date(ReqObj.DepDate);
   const StartOfDay = DepartureDate.setHours(0, 0, 0, 0);
   const EndOfDay = DepartureDate.setHours(23, 59, 59, 999);
-  console.log(StartOfDay);
-  console.log(EndOfDay);
+  // console.log(DepartureDate);
+  // console.log(ReqObj.ArrivalCity);
 
   try {
     const FlightsInfo = await Flight_Info.find({
-      departure_city: query.DepCity, arrival_city: query.ArrivalCity, departure_date: {
+      departure_city: ReqObj.DepCity, arrival_city: ReqObj.ArrivalCity, departure_date: {
         $gte: StartOfDay,
         $lt: EndOfDay
       }
@@ -23,8 +23,8 @@ async function getFlights(query, res) {
     });
   } catch (err) {
     console.log(err);
-    res.status(500).send('');
+    res.status(500).send('Flights not found for given date');
   }
 }
-module.exports = getFlights;
+module.exports = GetFlightsDB;
 
