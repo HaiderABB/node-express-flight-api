@@ -10,9 +10,10 @@ async function GetFlightInfo(req, res) {
       DepDate: req.query.DepDate
     }
 
-    console.log(ReqObj);
+    //console.log(ReqObj);
 
-    await GetFlightsDB(ReqObj, res);
+    const ResJson = await GetFlightsDB(ReqObj, res);
+    res.json(ResJson);
 
   } catch (err) {
     console.log(err)

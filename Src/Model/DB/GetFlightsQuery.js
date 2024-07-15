@@ -15,16 +15,12 @@ async function GetFlightsDB(ReqObj, res) {
         $lt: EndOfDay
       }
     });
-
-
-    res.json({
-      message: "Flights found",
-      data: FlightsInfo
-    });
+    return FlightsInfo;
   } catch (err) {
     console.log(err);
     res.status(500).send('Flights not found for given date');
   }
 }
 module.exports = GetFlightsDB;
+
 
