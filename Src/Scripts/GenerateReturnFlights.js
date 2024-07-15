@@ -2367,6 +2367,7 @@ const Data = [{
 
 
 function testAlpha(flight_code) {
+
   let alpha = ''
   let num = ''
   for (const i in flight_code) {
@@ -2381,6 +2382,7 @@ function testAlpha(flight_code) {
   }
   const tempNum = Number(num) + 1;
   return alpha + tempNum;
+
 }
 
 
@@ -2389,6 +2391,7 @@ const generateReturnFlights = () => {
   const tempData = [];
 
   for (const flight of Data) {
+
     const randomNumber = Math.floor(Math.random() * (20 - 12 + 1)) + 12;
     delete flight._id;
     const tempDate = new Date(flight.departure_date.$date);
@@ -2405,6 +2408,7 @@ const generateReturnFlights = () => {
 
   }
 
+  // Insert Return flights into the Database
   InsertFlightDB(tempData);
 
 }
